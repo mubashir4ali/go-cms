@@ -57,3 +57,14 @@ GET /api/me → Get current logged-in user (JWT required)
 ```bash
 go test ./tests -v
 ```
+
+## Environment Variables
+These are set in `docker-compose.yml`
+```bash
+DB_HOST=db
+DB_USER=postgres
+DB_PASSWORD=postgres
+DB_NAME=cms
+DB_PORT=5432
+
+```
