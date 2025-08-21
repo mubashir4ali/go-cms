@@ -1,0 +1,40 @@
+{
+    "info": {
+      "name": "CMS API",
+      "_postman_id": "cms-api-collection",
+      "description": "CMS API endpoints",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Get Categories",
+        "request": {
+          "method": "GET",
+          "url": { "raw": "http://localhost:8080/api/categories", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api","categories"] }
+        }
+      },
+      {
+        "name": "Create Category",
+        "request": {
+          "method": "POST",
+          "header": [{"key":"Content-Type","value":"application/json"}],
+          "body": {"mode":"raw","raw":"{\"name\":\"Tech\",\"description\":\"Tech category\"}"},
+          "url": { "raw": "http://localhost:8080/api/categories", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api","categories"] }
+        }
+      },
+      {
+        "name": "Get Contents",
+        "request": { "method": "GET", "url": { "raw": "http://localhost:8080/api/contents", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api","contents"] } }
+      },
+      {
+        "name": "Create Content",
+        "request": {
+          "method": "POST",
+          "header": [{"key":"Content-Type","value":"application/json"}],
+          "body": {"mode":"raw","raw":"{\"title\":\"Golang CRUD\",\"body\":\"Learn how to build a CMS API\",\"category_id\":1}"},
+          "url": { "raw": "http://localhost:8080/api/contents", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api","contents"] }
+        }
+      }
+    ]
+  }
+  

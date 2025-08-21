@@ -1,15 +1,13 @@
-# syntax=docker/dockerfile:1
-FROM golang:1.22-alpine
+FROM golang:1.23-alpine
 
 WORKDIR /app
 
-COPY go.mod go.sum ./
-RUN go mod download
+COPY cms-api/go.mod cms-api/go.sum ./
+RUN go mod tidy
 
-COPY . .
+COPY cms-api/ .
 
-RUN go build -o cms-api
+RUN go build -o /cms-api
 
 EXPOSE 8080
-
-CMD ["./cms-api"]
+CMD ["/cms-api"]

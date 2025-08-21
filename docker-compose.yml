@@ -1,8 +1,41 @@
-version: "3.9"
+# version: "3.3"
+# services:
+#   db:
+#     image: postgres:15-alpine
+#     container_name: cms-db
+#     environment:
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: postgres
+#       POSTGRES_DB: cms
+#     ports:
+#       - "5432:5432"
+#     volumes:
+#       - db_data:/var/lib/postgresql/data
 
+#   api:
+#     build: .
+#     container_name: cms-api
+#     depends_on:
+#       - db
+#     environment:
+#       DB_HOST: db
+#       DB_USER: postgres
+#       DB_PASSWORD: postgres
+#       DB_NAME: cms
+#       DB_PORT: 5432
+#     ports:
+#       - "8080:8080"
+#     volumes:
+#       - ./cms-api:/app 
+
+# volumes:
+#   db_data:
+
+
+version: "3.3"
 services:
   db:
-    image: postgres:15
+    image: postgres:15-alpine
     container_name: cms-db
     environment:
       POSTGRES_USER: postgres
@@ -14,20 +47,26 @@ services:
       - db_data:/var/lib/postgresql/data
 
   api:
-    build: .
+    build:
+      context: .
+      dockerfile: DockerfileDev   # 👈 use the dev file
     container_name: cms-api
     depends_on:
       - db
     environment:
-      - DB_HOST=db
-      - DB_USER=postgres
-      - DB_PASSWORD=postgres
-      - DB_NAME=cms
-      - DB_PORT=5432
+      DB_HOST: db
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: cms
+      DB_PORT: 5432
     ports:
       - "8080:8080"
     volumes:
-      - .:/app
+      - ./cms-api:/app            # 👈 mount source for hot reload
+      - go-mod-cache:/go/pkg/mod  # keep modules cached
+      - go-build-cache:/root/.cache/go-build
 
 volumes:
   db_data:
+  go-mod-cache:
+  go-build-cache:
